@@ -1,0 +1,3 @@
+{
+  "mongoURI": "mongodb+srv://ralence:ralence@kingconnector-owiux.mongodb.net/test?retryWrites=true&w=majority"
+}
