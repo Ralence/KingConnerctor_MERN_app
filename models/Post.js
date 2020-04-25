@@ -14,7 +14,7 @@ const PostSchema = new Schema({
     type: String,
   },
   avatar: {
-    typo: String,
+    type: String,
   },
   likes: [
     {
@@ -38,7 +38,7 @@ const PostSchema = new Schema({
         type: String,
       },
       avatar: {
-        typo: String,
+        type: String,
       },
       date: {
         type: Date,
