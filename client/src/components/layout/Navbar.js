@@ -11,7 +11,9 @@ function Navbar() {
   const AuthLinks = (
     <ul>
       <li>
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/dashboard">
+          <i className="fas fa-users"></i> <span className="hide-sm">Dashboard</span>
+        </Link>
       </li>
       <li>
         <a href="#!" onClick={() => dispatch(logout())}>
