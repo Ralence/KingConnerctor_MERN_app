@@ -1,7 +1,10 @@
 import React, { useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
 
-const CreateProfile = () => {
+import { createProfile } from "../../actions/profile";
+
+const CreateProfile = ({ history }) => {
   const [formData, setFormData] = useState({
     company: "",
     website: "",
@@ -18,6 +21,7 @@ const CreateProfile = () => {
   });
 
   const [displaySocialInputs, toggleDisplaySocialInputs] = useState(false);
+  const dispatch = useDispatch();
 
   const {
     company,
@@ -35,11 +39,17 @@ const CreateProfile = () => {
   } = formData;
 
   const onChange = (e) => {
-    setFormData((formData) => ({
+    setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    }));
+    });
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createProfile(formData, history));
+  };
+
   return (
     <Fragment>
       <h1 className="large text-primary">Create Your Profile</h1>
@@ -47,7 +57,7 @@ const CreateProfile = () => {
         <i className="fas fa-user"></i> Let's get some information to make your profile stand out
       </p>
       <small>* = required field</small>
-      <form className="form">
+      <form className="form" onSubmit={(e) => onSubmit(e)}>
         <div className="form-group">
           <select name="status" value={status} onChange={(e) => onChange(e)}>
             <option value="0">* Select Professional Status</option>
@@ -205,4 +215,4 @@ const CreateProfile = () => {
   );
 };
 
-export default CreateProfile;
+export default withRouter(CreateProfile);
