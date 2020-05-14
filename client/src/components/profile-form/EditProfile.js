@@ -1,10 +1,10 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 
-import { createProfile } from "../../actions/profile";
+import { createProfile, getCurrentProfile } from "../../actions/profile";
 
-const CreateProfile = ({ history }) => {
+const EditProfile = ({ history }) => {
   const [formData, setFormData] = useState({
     company: "",
     website: "",
@@ -21,7 +21,25 @@ const CreateProfile = ({ history }) => {
   });
 
   const [displaySocialInputs, toggleDisplaySocialInputs] = useState(false);
+
   const dispatch = useDispatch();
+
+  const { profile, loading } = useSelector((state) => state.profile);
+
+  useEffect(() => {
+    if (!profile) dispatch(getCurrentProfile());
+    if (!loading && profile) {
+      const profileData = { ...formData };
+      for (const key in profile) {
+        if (key in profileData) profileData[key] = profile[key];
+      }
+      for (const key in profile.social) {
+        if (key in profileData) profileData[key] = profile.social[key];
+      }
+      if (Array.isArray(profileData.skills)) profileData.skills = profileData.skills.join(", ");
+      setFormData(profileData);
+    }
+  }, [loading, getCurrentProfile, profile]);
 
   const {
     company,
@@ -47,7 +65,7 @@ const CreateProfile = ({ history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(createProfile(formData, history));
+    dispatch(createProfile(formData, history, true));
   };
 
   return (
@@ -207,12 +225,12 @@ const CreateProfile = ({ history }) => {
         )}
 
         <input type="submit" className="btn btn-primary my-1" />
-        <Link className="btn btn-light my-1" to="dashboard.html">
+        <aLink className="btn btn-light my-1" to="/dashboard">
           Go Back
-        </Link>
+        </aLink>
       </form>
     </Fragment>
   );
 };
 
-export default withRouter(CreateProfile);
+export default withRouter(EditProfile);
