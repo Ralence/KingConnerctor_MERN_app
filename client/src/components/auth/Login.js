@@ -17,12 +17,10 @@ function Login() {
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("login");
     dispatch(login(email, password));
   };
 
