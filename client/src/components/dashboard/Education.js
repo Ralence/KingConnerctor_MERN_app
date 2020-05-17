@@ -45,7 +45,7 @@ const Education = ({ education }) => {
 };
 
 Education.propTypes = {
-  experience: PropTypes.array.isRequired,
+  education: PropTypes.array.isRequired,
 };
 
 export default Education;
