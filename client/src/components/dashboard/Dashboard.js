@@ -7,7 +7,7 @@ import Experience from "./Experience";
 import Education from "./Education";
 
 import DashboardActions from "./DashboardActions";
-import { getCurrentProfile } from "../../actions/profile";
+import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 
 const Dashboard = () => {
   const {
@@ -36,6 +36,11 @@ const Dashboard = () => {
           <DashboardActions />
           <Experience experience={profile.experience} />
           <Education education={profile.education} />
+          <div className="my-2">
+            <button className="btn btn-danger" onClick={() => dispatch(deleteAccount())}>
+              <i className="fas fa-user-minus"></i> Delete my Account
+            </button>
+          </div>
         </Fragment>
       ) : (
         <Fragment>

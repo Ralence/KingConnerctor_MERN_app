@@ -80,7 +80,7 @@ const AddEducation = ({ history }) => {
               value={current}
               onChange={(e) => setFormData({ ...formData, current: !current })}
             />{" "}
-            Current Job
+            Currently studying
           </p>
         </div>
         <div className="form-group">

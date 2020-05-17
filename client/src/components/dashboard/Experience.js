@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import Moment from "react-moment";
 
+import { deleteExperience } from "../../actions/profile";
+
 const Experience = ({ experience }) => {
+  const dispatch = useDispatch();
+
   const Experiences = experience.map((exp) => {
     return (
       <tr key={exp._id}>
@@ -14,7 +18,9 @@ const Experience = ({ experience }) => {
           {exp.to === null ? " Now" : <Moment format="YYYY/MM/DD">{exp.to}</Moment>}
         </td>
         <td>
-          <button className="btn btn-danger">Delete</button>
+          <button className="btn btn-danger" onClick={() => dispatch(deleteExperience(exp._id))}>
+            Delete
+          </button>
         </td>
       </tr>
     );

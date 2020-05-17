@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import Moment from "react-moment";
 
+import { deleteEducation } from "../../actions/profile";
+
 const Education = ({ education }) => {
+  const dispatch = useDispatch();
+
   const Educations = education.map((edu) => {
     return (
       <tr key={edu._id}>
@@ -14,7 +18,9 @@ const Education = ({ education }) => {
           {edu.to === null ? " Now" : <Moment format="YYYY/MM/DD">{edu.to}</Moment>}
         </td>
         <td>
-          <button className="btn btn-danger">Delete</button>
+          <button className="btn btn-danger" onClick={() => dispatch(deleteEducation(edu._id))}>
+            Delete
+          </button>
         </td>
       </tr>
     );
