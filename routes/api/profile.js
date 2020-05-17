@@ -6,6 +6,7 @@ const { check, validationResult } = require("express-validator");
 
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
+const Post = require("../../models/Post");
 
 const auth = require("../../middleware/auth");
 
@@ -140,7 +141,9 @@ router.get("/user/:user_id", async (req, res) => {
 // @access    Private
 router.delete("/", auth, async (req, res) => {
   try {
-    // TODO remove users posts
+    // Remove users posts
+    Post.deleteMany({ user: req.user.id });
+
     // Remove user profile
     await Profile.findOneAndRemove({ user: req.user.id });
     // Remove the user
@@ -286,24 +289,6 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
 // @desc     Get user repositories from gitHub
 // @access   Public
 router.get("/github/:username", async (req, res) => {
-  /*fetch(
-    `https://api.github.com/users/${
-      req.params.username
-    }/repos?per_page=5&sort=created:asc&client_id=${config.get(
-      "githubClientId"
-    )}&client_secert=${config.get("hithubSecret")}`,
-    {
-      method: "GET",
-      headers: { "user-agent": "node.js" },
-    }
-  )
-    .then((result) => {
-      res.json(result);
-    })
-    .catch((err) => {
-      console.error(err.message);
-      res.status(404).send("Server error");
-    });*/
   try {
     const repos = await axios.get(
       `https://api.github.com/users/${
