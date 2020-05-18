@@ -1,6 +1,7 @@
 import {
   GET_PROFILE,
   GET_PROFILES,
+  GET_REPOS,
   PROFILE_ERROR,
   CLEAR_PROFILE,
   UPDATE_PROFILE,
@@ -42,6 +43,12 @@ const profile = (state = initialState, action) => {
         profile: null,
         repos: [],
         loading: false,
+      };
+    case GET_REPOS:
+      return {
+        ...state,
+        loading: false,
+        repos: payload,
       };
     default:
       return state;

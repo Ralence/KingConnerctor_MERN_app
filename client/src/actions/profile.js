@@ -4,6 +4,7 @@ import { setAlert } from "./alert";
 import {
   GET_PROFILE,
   GET_PROFILES,
+  GET_REPOS,
   PROFILE_ERROR,
   UPDATE_PROFILE,
   CLEAR_PROFILE,
@@ -53,7 +54,6 @@ export const getProfiles = () => async (dispatch) => {
 
 // Get a profile by ID
 export const getProfileById = (userID) => async (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
   try {
     const res = await axios.get(`/api/profile/user/${userID}`);
 
@@ -71,6 +71,27 @@ export const getProfileById = (userID) => async (dispatch) => {
     });
   }
 };
+
+// Get GitHub repos
+export const getGitHubRepos = (username) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/github/${username}`);
+
+    dispatch({
+      type: GET_REPOS,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
+    });
+  }
+};
+
 // Create or Update a profile
 
 export const createProfile = (formData, history, edit = false) => async (dispatch) => {
