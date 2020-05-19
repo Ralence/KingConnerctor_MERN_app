@@ -39,7 +39,7 @@ const EditProfile = ({ history }) => {
       if (Array.isArray(profileData.skills)) profileData.skills = profileData.skills.join(", ");
       setFormData(profileData);
     }
-  }, [loading, getCurrentProfile, profile]);
+  }, [loading, dispatch, profile]);
 
   const {
     company,
@@ -225,9 +225,9 @@ const EditProfile = ({ history }) => {
         )}
 
         <input type="submit" className="btn btn-primary my-1" />
-        <aLink className="btn btn-light my-1" to="/dashboard">
+        <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
-        </aLink>
+        </Link>
       </form>
     </Fragment>
   );

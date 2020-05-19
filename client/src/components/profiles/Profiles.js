@@ -11,7 +11,7 @@ export const Profiles = () => {
 
   useEffect(() => {
     dispatch(getProfiles());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Fragment>
