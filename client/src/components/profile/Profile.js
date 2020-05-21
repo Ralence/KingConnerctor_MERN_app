@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
+import ProfileTop from "./ProfileTop";
 import { getProfileById } from "../../actions/profile";
 
 const Profile = ({ match: { params } }) => {
@@ -12,7 +13,7 @@ const Profile = ({ match: { params } }) => {
 
   useEffect(() => {
     dispatch(getProfileById(params.id));
-  }, [dispatch]);
+  }, [dispatch, params.id]);
 
   return (
     <Fragment>
@@ -28,6 +29,9 @@ const Profile = ({ match: { params } }) => {
               Edit Profile
             </Link>
           )}
+          <div className="profile-grid my-1">
+            <ProfileTop profile={profile} />
+          </div>
         </Fragment>
       )}
     </Fragment>
