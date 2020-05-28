@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
+import { addLike, removeLike } from "../../actions/post";
 import { useDispatch, useSelector } from "react-redux";
 
 const PostItem = ({ post }) => {
@@ -20,10 +21,10 @@ const PostItem = ({ post }) => {
         <p className="post-date">
           Posted on <Moment format="YYYY/MM/DD" date={date} />
         </p>
-        <button type="button" className="btn btn-light">
+        <button type="button" className="btn btn-light" onClick={() => dispatch(addLike(_id))}>
           <i className="fas fa-thumbs-up"></i> {likes.length && <span>{likes.length}</span>}
         </button>
-        <button type="button" className="btn btn-light">
+        <button type="button" className="btn btn-light" onClick={() => dispatch(removeLike(_id))}>
           <i className="fas fa-thumbs-down"></i>
         </button>
         <Link to={`/post/${_id}`} className="btn btn-primary">
