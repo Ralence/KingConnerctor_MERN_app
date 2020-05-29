@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
-import { addLike, removeLike } from "../../actions/post";
+import { addLike, removeLike, deletePost } from "../../actions/post";
 import { useDispatch, useSelector } from "react-redux";
 
 const PostItem = ({ post }) => {
@@ -31,7 +31,11 @@ const PostItem = ({ post }) => {
           Discussion {comments.length && <span className="comment-count">{comments.length}</span>}
         </Link>
         {!auth.loading && user === auth.user._id && (
-          <button type="button" className="btn btn-danger">
+          <button
+            onClick={() => dispatch(deletePost(_id))}
+            type="button"
+            className="btn btn-danger"
+          >
             <i className="fas fa-times"></i>
           </button>
         )}
