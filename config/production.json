@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://ralence:ralence@kingconnector-owiux.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "myBigSecretToken",
+  "githubClientId": "50a75447a24fcb28deec",
+  "githubSecret": "3f285f26936a24e3df2a9c573bc2f301c2d7c2e4"
+}
